@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Usuario extends Controller
 {
@@ -13,10 +14,10 @@ class Usuario extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
-        $response["usuarios"]=$usaurios;
+        $usuarios = DB::select('select * from usuario');
+        $response["usuarios"]=$usuarios;
         $response["succes"]=1;
-        return response()->json($respone);
+        return response()->json($response);
     }
 
     /**
@@ -37,7 +38,14 @@ class Usuario extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $res = DB::insert('insert into rol (tipo) values (?)', [$request->tipo]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
     }
 
     /**

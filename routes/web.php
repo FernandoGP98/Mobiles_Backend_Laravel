@@ -15,4 +15,5 @@ use App\Http\Controllers\Usuario;
 |
 */
 
-Route::post('/login', [Usuario::class, 'getUsuarioPorId']);
+//Route::get('/login', [Usuario::class, 'index']);
+Route::resource('/login', Usuario::class);
