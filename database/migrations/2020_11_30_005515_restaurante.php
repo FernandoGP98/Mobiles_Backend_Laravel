@@ -13,7 +13,7 @@ class Restaurante extends Migration
      */
     public function up()
     {
-        Schema::create('restaurante', function (Blueprint $table) {
+        Schema::create('restaurantes', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
@@ -31,7 +31,7 @@ class Restaurante extends Migration
             $table->string('longitud')->nullable();
 
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuario');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
 
             $table->timestamps();
         });
@@ -44,6 +44,6 @@ class Restaurante extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restaurante');
+        Schema::dropIfExists('restaurantes');
     }
 }

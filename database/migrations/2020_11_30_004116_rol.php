@@ -13,7 +13,7 @@ class Rol extends Migration
      */
     public function up()
     {
-        Schema::create('rol', function (Blueprint $table) {
+        Schema::create('rols', function (Blueprint $table) {
             $table->id();
             $table->string('tipo');
             $table->timestamps();
@@ -27,6 +27,6 @@ class Rol extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rol');
+        Schema::dropIfExists('rols');
     }
 }

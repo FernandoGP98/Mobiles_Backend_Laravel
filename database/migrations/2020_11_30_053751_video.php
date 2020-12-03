@@ -13,12 +13,12 @@ class Video extends Migration
      */
     public function up()
     {
-        Schema::create('video', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->string('URL');
 
             $table->unsignedBigInteger('restaurante_id');
-            $table->foreign('restaurante_id')->references('id')->on('restaurante');
+            $table->foreign('restaurante_id')->references('id')->on('restaurantes');
 
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class Video extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('video');
+        Schema::dropIfExists('videos');
     }
 }

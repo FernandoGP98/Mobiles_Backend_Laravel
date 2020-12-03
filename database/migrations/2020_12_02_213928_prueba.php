@@ -13,7 +13,7 @@ class Prueba extends Migration
      */
     public function up()
     {
-        Schema::create('prueba', function (Blueprint $table) {
+        Schema::create('pruebas', function (Blueprint $table) {
             $table->id();
             $table->string('texto')->nullable();
             $table->integer('int')->nullable();
@@ -28,6 +28,6 @@ class Prueba extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pruebas');
     }
 }

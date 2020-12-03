@@ -13,14 +13,14 @@ class Comentario extends Migration
      */
     public function up()
     {
-        Schema::create('comentario', function (Blueprint $table) {
+        Schema::create('comentarios', function (Blueprint $table) {
             $table->id();
             $table->string('texto');
             $table->integer('calificacion');
             $table->unsignedBigInteger('restaurante_id');
-            $table->foreign('restaurante_id')->references('id')->on('restaurante');
+            $table->foreign('restaurante_id')->references('id')->on('restaurantes');
             $table->unsignedBigInteger('usuario_id');
-            $table->foreign('usuario_id')->references('id')->on('usuario');
+            $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class Comentario extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comentario');
+        Schema::dropIfExists('comentarios');
     }
 }

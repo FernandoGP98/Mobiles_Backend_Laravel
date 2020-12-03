@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Usuario;
+
 class RutasController extends Controller
 {
     public function getPrueba(){
@@ -27,7 +29,9 @@ class RutasController extends Controller
     }
 
     public function UsuarioGetByCorreo(Request $request){
-        $usuario = DB::select('select id, nombre, email, password, foto, rol_id from usuario where email = ?', [$request->correo]);
+        $usuario = Usuario::select('id', 'nombre', 'email', 'password', 'foto', 'rol_id')
+        ->where( 'email', $request->correo)->get();
+
         if(!is_null($usuario)){
             $response["usuario"]=$usuario;
             $response["success"]=1;
@@ -35,7 +39,7 @@ class RutasController extends Controller
             $response["usuario"]=null;
             $response["success"]=0;
         }
-        return response()->json($response);
+        return  ($response);
         //return '{"resultado":"Correcto", "th":'.$usuario->toJson().'}';
     }
 }
