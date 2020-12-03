@@ -30,7 +30,7 @@ class RutasController extends Controller
 
     public function UsuarioGetByCorreo(Request $request){
         $usuario = Usuario::select('id', 'nombre', 'email', 'password', 'foto', 'rol_id')
-        ->where( 'email', $request->correo)->get();
+        ->where( 'email', $request->correo)->where('password', $request->password)->get();
 
         if($usuario->count()>0){
             $response["usuario"]=$usuario;
