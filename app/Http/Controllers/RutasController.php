@@ -32,14 +32,14 @@ class RutasController extends Controller
         $usuario = Usuario::select('id', 'nombre', 'email', 'password', 'foto', 'rol_id')
         ->where( 'email', $request->correo)->get();
 
-        if(!is_null($usuario)){
+        if($usuario->count()>0){
             $response["usuario"]=$usuario;
             $response["success"]=1;
         }else{
-            $response["usuario"]=null;
+            $response["usuario"]=$usuario;
             $response["success"]=0;
         }
-        return  ($response);
+        return response()->json($response);
         //return '{"resultado":"Correcto", "th":'.$usuario->toJson().'}';
     }
 }
