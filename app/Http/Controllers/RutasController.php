@@ -25,4 +25,17 @@ class RutasController extends Controller
             return response()->json($response);
         }
     }
+
+    public function UsuarioGetByCorreo(Request $request){
+        $usuario = DB::select('select id, nombre, email, password, foto, rol_id from usaurio where correo = ?', [$request->correo]);
+        if(!is_null($usuario)){
+            $response["usuario"]=$usuario;
+            $response["success"]=1;
+        }else{
+            $response["usuario"]=null;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+        //return '{"resultado":"Correcto", "th":'.$usuario->toJson().'}';
+    }
 }

@@ -32,4 +32,5 @@ LOS GET NO REQUIEREN ESTE PASO.
 
 Route::post('/getPrueba', 'RutasController@getPrueba');
 Route::post('/registrarPrueba','RutasController@registrarPrueba');
+Route::post('/UsuarioGetByCorreo', 'RutasController@UsuarioGetByCorreo');
 //Route::post('/login', 'Usuario');
