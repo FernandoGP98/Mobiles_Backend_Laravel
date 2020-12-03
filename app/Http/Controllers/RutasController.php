@@ -10,7 +10,7 @@ use App\Models\Usuario;
 class RutasController extends Controller
 {
     public function getPrueba(){
-        $prueba = DB::select('select * from prueba');
+        $prueba = DB::select('select * from pruebas');
         $response["prueba"]=$prueba;
         $response["succes"]=1;
         return response()->json($response);
@@ -18,7 +18,7 @@ class RutasController extends Controller
     }
 
     public function registrarPrueba(Request $request){
-        $res = DB::insert('insert into prueba (texto) values (?)', [$request->texto]);
+        $res = DB::insert('insert into pruebas (texto) values (?)', [$request->texto]);
         if($res>0){
             $response["succes"]=1;
             return response()->json($response);
