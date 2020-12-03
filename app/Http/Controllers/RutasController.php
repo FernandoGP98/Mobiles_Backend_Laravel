@@ -27,7 +27,7 @@ class RutasController extends Controller
     }
 
     public function UsuarioGetByCorreo(Request $request){
-        $usuario = DB::select('select id, nombre, email, password, foto, rol_id from usaurio where correo = ?', [$request->correo]);
+        $usuario = DB::select('select id, nombre, email, password, foto, rol_id from usuario where email = ?', [$request->correo]);
         if(!is_null($usuario)){
             $response["usuario"]=$usuario;
             $response["success"]=1;
