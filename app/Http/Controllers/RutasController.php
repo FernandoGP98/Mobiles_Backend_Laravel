@@ -42,4 +42,16 @@ class RutasController extends Controller
         return response()->json($response);
         //return '{"resultado":"Correcto", "th":'.$usuario->toJson().'}';
     }
+
+    public  function UsuarioRegistrar(Request $request){
+        $res = DB::insert('insert into usuarios (email, password, nombre, rol_id) values (?,?,?,3)',
+        [$request->correo, $request->password, $request->nombre]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
 }

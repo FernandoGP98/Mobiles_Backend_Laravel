@@ -14,6 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/getPrueba',
         '/registrarPrueba',
-        '/UsuarioGetByCorreo'
+        '/UsuarioGetByCorreo',
+        '/UsuarioRegistrar'
     ];
 }
