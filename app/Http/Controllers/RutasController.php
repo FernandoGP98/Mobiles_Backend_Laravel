@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Usuario;
 use App\Models\Restaurante;
+use App\Models\Imagen;
+use App\Models\Video;
+use App\Models\Comentario;
 
 class RutasController extends Controller
 {
@@ -45,8 +48,8 @@ class RutasController extends Controller
     }
 
     public  function UsuarioRegistrar(Request $request){
-        $res = DB::insert('insert into usuarios (email, password, nombre, rol_id) values (?,?,?,3)',
-        [$request->correo, $request->password, $request->nombre]);
+        $res = DB::insert('insert into usuarios (email, password, nombre, rol_id) values (?,?,?,?)',
+        [$request->correo, $request->password, $request->nombre, $request->id_Rol]);
         if($res>0){
             $response["succes"]=1;
             return response()->json($response);
@@ -63,6 +66,109 @@ class RutasController extends Controller
             $response["success"]=1;
         }else{
             $response["restaurantes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
+    public  function RestaurantesRegistro(Request $request){
+        $res = DB::insert('insert into restaurantes (nombre, descripcion, locacion,
+        lunes, martes, miercoles, jueves, viernes, sabado, domingo,latitud, longitud,
+        usuario_id) values (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+        [$request->nombre, $request->descripcion, $request->locacion, $request->lunes,
+        $request->martes, $request->miercoles, $request->jueves, $request->viernes,
+        $request->sabado, $request->domingo, $request->latitud, $request->longitud,
+        $request->usuario]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function ImagenRegistro(Request $request){
+        $res = DB::insert('insert into imagens (URL, restaurante_id) values(?,?)',
+        [$request->url, $request->restaurante_id]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function ImagenGetByRestauranteId(Request $request){
+        $res = Imagen::select('id','URL')->where('restaurante_id', $request->restaurante_id)->get();
+        if($res->count()>0){
+            $response["imagenes"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["imagenes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
+    public function VideoRegistro(Request $request){
+        $res = DB::insert('insert into videos (URL, restaurante_id) values(?,?)',
+        [$request->url, $request->restaurante_id]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function VideoGetRestauranteId(Request $request){
+        $res = Video::select('id','URL')->where('restaurante_id', $request->restaurante_id)->get();
+        if($res->count()>0){
+            $response["videos"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["videos"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
+    public function ComentarioRegistro(Request $request){
+        $res = DB::insert('insert into comentarios (texto, calificacion, restaurante_id, usuario_id) values(?,?,?,?)',
+        [$request->texto, $request->calificacion, $request->restaurante_id, $request->usuario_id]);
+        if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function ComentarioGetByRestauranteId(Request $request){
+        $res = Comentario::select('id','texto', 'calificacion', 'usuario_id')
+        ->where('restaurante_id', $request->restaurante_id)->get();
+        if($res->count()>0){
+            $response["comentarios"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["comentarios"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
+    public function ComentarioGetByUsuarioId(Request $request){
+        $res = Comentario::select('id','texto', 'calificacion', 'restaurante_id')
+        ->where('usuario_id', $request->user_id)->get();
+        if($res->count()>0){
+            $response["comentarios"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["comentarios"]=$res;
             $response["success"]=0;
         }
         return response()->json($response);
