@@ -57,7 +57,7 @@ class RutasController extends Controller
     }
 
     public  function RestaurantesGetAllPublicados(){
-        $res = Restaurante::select('id','nombre','descripcion', 'calificacion')->get();
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion')->where('estado', 1)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
