@@ -48,9 +48,16 @@ class RutasController extends Controller
     }
 
     public  function UsuarioRegistrar(Request $request){
-        $res = DB::insert('insert into usuarios (email, password, nombre, rol_id) values (?,?,?,?)',
-        [$request->correo, $request->password, $request->nombre, $request->id_Rol]);
-        if($res>0){
+        /*$res = DB::insert('insert into usuarios (email, password, nombre, rol_id) values (?,?,?,?)',
+        [$request->correo, $request->password, $request->nombre, $request->id_Rol]);*/
+
+        $user = new Usuario;
+        $user->nombre = $request->nombre;
+        $user->email=$request->correo;
+        $user->password=$request->password;
+        $user->rol_id=$request->id_rol;
+        if($user->save()){
+            $response["usuario"]=$user;
             $response["succes"]=1;
             return response()->json($response);
         }else{
