@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Usuario;
+use App\Models\Restaurante;
 
 class RutasController extends Controller
 {
@@ -53,5 +54,17 @@ class RutasController extends Controller
             $response["succes"]=0;
             return response()->json($response);
         }
+    }
+
+    public  function RestaurantesGetAllPublicados(){
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion')->get();
+        if($res->count()>0){
+            $response["restaurantes"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["restaurantes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
     }
 }

@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         '/getPrueba',
         '/registrarPrueba',
         '/UsuarioGetByCorreo',
-        '/UsuarioRegistrar'
+        '/UsuarioRegistrar',
+        '/RestaurantesGetAllPublicados'
     ];
 }
