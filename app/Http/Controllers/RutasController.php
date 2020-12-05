@@ -66,6 +66,19 @@ class RutasController extends Controller
         }
     }
 
+    public function UsuarioUpdateNombre(Request $request){
+        $usuario = Usuario::find($request->id);
+        $usuario->nombre = $request->nombre;
+        if($usuario->save()){
+            $response["usuario"]=Usuario::find($usuario->id);
+            $response["success"]=1;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
+    }
+
     public  function RestaurantesGetAllPublicados(){
         $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
         ->where('estado', 0)->get();
