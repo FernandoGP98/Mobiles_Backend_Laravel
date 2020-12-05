@@ -16,7 +16,7 @@ class RutasController extends Controller
     public function getPrueba(){
         $prueba = DB::select('select * from pruebas');
         $response["prueba"]=$prueba;
-        $response["succes"]=1;
+        $response["success"]=1;
         return response()->json($response);
         //return '{"resultado":"Correcto", "th":'.$usuario->toJson().'}';
     }
@@ -24,10 +24,10 @@ class RutasController extends Controller
     public function registrarPrueba(Request $request){
         $res = DB::insert('insert into pruebas (texto) values (?)', [$request->texto]);
         if($res>0){
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -58,10 +58,10 @@ class RutasController extends Controller
         $user->rol_id=$request->rol_id;
         if($user->save()){
             $response["usuario"]=Usuario::find($user->id);
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -87,10 +87,10 @@ class RutasController extends Controller
         $request->sabado, $request->domingo, $request->latitud, $request->longitud,
         $request->usuario]);
         if($res>0){
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -104,10 +104,10 @@ class RutasController extends Controller
         $restaurante->estado = $request->estado;
         if($restaurante->save()){
             $response["restaurante"]=Restaurante::find($restaurante->id);
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -116,10 +116,10 @@ class RutasController extends Controller
         $res = DB::insert('insert into imagens (URL, restaurante_id) values(?,?)',
         [$request->url, $request->restaurante_id]);
         if($res>0){
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -140,10 +140,10 @@ class RutasController extends Controller
         $res = DB::insert('insert into videos (URL, restaurante_id) values(?,?)',
         [$request->url, $request->restaurante_id]);
         if($res>0){
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
@@ -164,10 +164,10 @@ class RutasController extends Controller
         $res = DB::insert('insert into comentarios (texto, calificacion, restaurante_id, usuario_id) values(?,?,?,?)',
         [$request->texto, $request->calificacion, $request->restaurante_id, $request->usuario_id]);
         if($res>0){
-            $response["succes"]=1;
+            $response["success"]=1;
             return response()->json($response);
         }else{
-            $response["succes"]=0;
+            $response["success"]=0;
             return response()->json($response);
         }
     }
