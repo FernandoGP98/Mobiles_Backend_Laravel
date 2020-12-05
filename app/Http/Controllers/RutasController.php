@@ -79,6 +79,19 @@ class RutasController extends Controller
         }
     }
 
+    public function UsuarioUpdatePass(Request $request){
+        $usuario = Usuario::find($request->id);
+        $usuario->password = $request->password;
+        if($usuario->save()){
+            $response["usuario"]=Usuario::find($usuario->id);
+            $response["success"]=1;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
+    }
+
     public function UsuarioUpdateFoto(Request $request){
         $usuario = Usuario::find($request->id);
         $usuario->foto = $request->foto;
