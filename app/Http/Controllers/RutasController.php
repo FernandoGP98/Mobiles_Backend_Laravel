@@ -126,16 +126,31 @@ class RutasController extends Controller
     }
 
     public function FavoritoRegistrar(Request $request){
-        $fav = new favorito;
-        $fav->restaurante_id= $request->restaurante_id;
-        $fav->usuario_id= $request->usuario_id;
-        if($fav->save()){
-            $response["success"]=1;
-            return response()->json($response);
+
+        $siHay = favorito::where('usuario_id', $request->usuario_id)
+        ->where('restaurante_id', $request->restaurante_id)->get();
+        if($siHay->isEmpty()){
+            $fav = new favorito;
+            $fav->restaurante_id= $request->restaurante_id;
+            $fav->usuario_id= $request->usuario_id;
+            if($fav->save()){
+                $response["success"]=1;
+                return response()->json($response);
+            }else{
+                $response["success"]=0;
+                return response()->json($response);
+            }
         }else{
+            $siHay[0]->delete();
+            $siHay=1;
+
             $response["success"]=0;
+            $response["siHay"]=1;
             return response()->json($response);
         }
+
+
+
 
     }
 
