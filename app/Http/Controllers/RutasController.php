@@ -55,7 +55,7 @@ class RutasController extends Controller
         $user->nombre = $request->nombre;
         $user->email=$request->correo;
         $user->password=$request->password;
-        $user->rol_id=$request->id_rol;
+        $user->rol_id=$request->rol_id;
         if($user->save()){
             $response["usuario"]=Usuario::find($user->id);
             $response["succes"]=1;
