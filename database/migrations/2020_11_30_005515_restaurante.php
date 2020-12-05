@@ -19,7 +19,6 @@ class Restaurante extends Migration
             $table->string('descripcion');
             $table->integer('calificacion')->nullable();
             $table->text('locacion');
-            $table->boolean('estado');
             $table->time('lunes', 0)->nullable();
             $table->time('martes', 0)->nullable();
             $table->time('miercoles', 0)->nullable();
@@ -29,6 +28,10 @@ class Restaurante extends Migration
             $table->time('domingo', 0)->nullable();
             $table->string('latitud')->nullable();
             $table->string('longitud')->nullable();
+            $table->string('img1')->nullable();
+            $table->string('img2')->nullable();
+            $table->string('img3')->nullable();
+            $table->boolean('estado');
 
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuarios');

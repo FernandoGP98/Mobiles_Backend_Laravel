@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 use App\Models\Usuario;
 use App\Models\Restaurante;
-use App\Models\Imagen;
 use App\Models\Video;
 use App\Models\Comentario;
 
@@ -86,6 +85,15 @@ class RutasController extends Controller
         $request->martes, $request->miercoles, $request->jueves, $request->viernes,
         $request->sabado, $request->domingo, $request->latitud, $request->longitud,
         $request->usuario]);
+
+        /*$restaurante = new Restaurante;
+        $restaurante->nombre = $request->nombre;
+        $restaurante->descripcion = $request->descripcion;
+        $restaurante->locacion = $request->locacion;
+        $restaurante->usuario_id = $request->usuario_id;
+        $restaurante->estado = $request->estado;*/
+
+
         if($res>0){
             $response["success"]=1;
             return response()->json($response);
@@ -102,6 +110,9 @@ class RutasController extends Controller
         $restaurante->usuario_id = $request->usuario_id;
         $restaurante->locacion = "";
         $restaurante->estado = $request->estado;
+        $restaurante->img1=$request->img1;
+        $restaurante->img2=$request->img2;
+        $restaurante->img3=$request->img3;
         if($restaurante->save()){
             $response["restaurante"]=Restaurante::find($restaurante->id);
             $response["success"]=1;
@@ -110,30 +121,6 @@ class RutasController extends Controller
             $response["success"]=0;
             return response()->json($response);
         }
-    }
-
-    public function ImagenRegistro(Request $request){
-        $res = DB::insert('insert into imagens (URL, restaurante_id) values(?,?)',
-        [$request->url, $request->restaurante_id]);
-        if($res>0){
-            $response["success"]=1;
-            return response()->json($response);
-        }else{
-            $response["success"]=0;
-            return response()->json($response);
-        }
-    }
-
-    public function ImagenGetByRestauranteId(Request $request){
-        $res = Imagen::select('id','URL')->where('restaurante_id', $request->restaurante_id)->get();
-        if($res->count()>0){
-            $response["imagenes"]=$res;
-            $response["success"]=1;
-        }else{
-            $response["imagenes"]=$res;
-            $response["success"]=0;
-        }
-        return response()->json($response);
     }
 
     public function VideoRegistro(Request $request){
