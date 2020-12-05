@@ -9,6 +9,7 @@ use App\Models\Usuario;
 use App\Models\Restaurante;
 use App\Models\Video;
 use App\Models\Comentario;
+use App\Models\favorito;
 
 class RutasController extends Controller
 {
@@ -66,7 +67,8 @@ class RutasController extends Controller
     }
 
     public  function RestaurantesGetAllPublicados(){
-        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')->where('estado', 0)->get();
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
+        ->where('estado', 0)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
@@ -123,25 +125,33 @@ class RutasController extends Controller
         }
     }
 
-    public function VideoRegistro(Request $request){
-        $res = DB::insert('insert into videos (URL, restaurante_id) values(?,?)',
-        [$request->url, $request->restaurante_id]);
-        if($res>0){
+    public function FavoritoRegistrar(Request $request){
+        $fav = new favorito;
+        $fav->restaurante_id= $request->restaurante_id;
+        $fav->usuario_id= $request->usuario_id;
+        if($fav->save()){
             $response["success"]=1;
             return response()->json($response);
         }else{
             $response["success"]=0;
             return response()->json($response);
         }
+
     }
 
-    public function VideoGetRestauranteId(Request $request){
-        $res = Video::select('id','URL')->where('restaurante_id', $request->restaurante_id)->get();
-        if($res->count()>0){
-            $response["videos"]=$res;
+    public function FavoritoGetByUsuarioId(Request $request){
+        $fav = DB::table('favoritos')
+        ->select('restaurantes.id','restaurantes.nombre','restaurantes.descripcion','restaurantes.calificacion',
+        'restaurantes.img1', 'restaurantes.img2', 'restaurantes.img3')
+         ->join('restaurantes', 'restaurantes.id', '=', 'favoritos.restaurante_id')
+         ->join('usuarios', 'usuarios.id', '=', 'favoritos.usuario_id')
+         ->where('usuarios.id', $request->usuario_id)->get();
+        if($fav->count()>0){
+            $response["favoritos"]=$fav;
             $response["success"]=1;
+
         }else{
-            $response["videos"]=$res;
+            $response["favoritos"]=$fav;
             $response["success"]=0;
         }
         return response()->json($response);
