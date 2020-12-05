@@ -32,9 +32,11 @@ LOS GET NO REQUIEREN ESTE PASO.
 
 Route::post('/getPrueba', 'RutasController@getPrueba');
 Route::post('/registrarPrueba','RutasController@registrarPrueba');
+
 Route::post('/UsuarioGetByCorreo', 'RutasController@UsuarioGetByCorreo');
 Route::post('/UsuarioRegistrar', 'RutasController@UsuarioRegistrar');
 Route::post('/UsuarioUpdateNombre', 'RutasController@UsuarioUpdateNombre');
+Route::post('/UsuarioUpdateFoto', 'RutasController@UsuarioUpdateFoto');
 
 Route::post('/RestaurantesGetAllPublicados', 'RutasController@RestaurantesGetAllPublicados');
 Route::post('/RestaurantesRegistro', 'RutasController@RestaurantesRegistro');
