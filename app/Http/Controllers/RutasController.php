@@ -133,19 +133,21 @@ class RutasController extends Controller
             $fav = new favorito;
             $fav->restaurante_id= $request->restaurante_id;
             $fav->usuario_id= $request->usuario_id;
+            $siHay=0;
             if($fav->save()){
                 $response["success"]=1;
+                $response["siHay"]=$siHay;
                 return response()->json($response);
             }else{
                 $response["success"]=0;
+                $response["siHay"]=$siHay;
                 return response()->json($response);
             }
         }else{
             $siHay[0]->delete();
             $siHay=1;
-
             $response["success"]=0;
-            $response["siHay"]=1;
+            $response["siHay"]=$siHay;
             return response()->json($response);
         }
 
