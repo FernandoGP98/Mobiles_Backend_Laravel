@@ -57,7 +57,7 @@ class RutasController extends Controller
         $user->password=$request->password;
         $user->rol_id=$request->id_rol;
         if($user->save()){
-            $response["usuario"]=$user;
+            $response["usuario"]=Usuario::find($user->id);
             $response["succes"]=1;
             return response()->json($response);
         }else{
@@ -87,6 +87,23 @@ class RutasController extends Controller
         $request->sabado, $request->domingo, $request->latitud, $request->longitud,
         $request->usuario]);
         if($res>0){
+            $response["succes"]=1;
+            return response()->json($response);
+        }else{
+            $response["succes"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function RestauranteRegistroPrueba(Request $request){
+        $restaurante = new Restaurante;
+        $restaurante->nombre = $request->nombre;
+        $restaurante->descripcion = $request->descripcion;
+        $restaurante->usuario_id = $request->usuario_id;
+        $restaurante->locacion = "";
+        $restaurante->estado = $request->estado;
+        if($restaurante->save()){
+            $response["restaurante"]=Restaurante::find($restaurante->id);
             $response["succes"]=1;
             return response()->json($response);
         }else{

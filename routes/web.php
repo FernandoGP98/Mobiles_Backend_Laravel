@@ -36,6 +36,7 @@ Route::post('/UsuarioGetByCorreo', 'RutasController@UsuarioGetByCorreo');
 Route::post('/UsuarioRegistrar', 'RutasController@UsuarioRegistrar');
 Route::post('/RestaurantesGetAllPublicados', 'RutasController@RestaurantesGetAllPublicados');
 Route::post('/RestaurantesRegistro', 'RutasController@RestaurantesRegistro');
+Route::post('/RestauranteRegistroPrueba', 'RutasController@RestauranteRegistroPrueba');
 Route::post('/ImagenRegistro', 'RutasController@ImagenRegistro');
 Route::post('/ImagenGetByRestauranteId', 'RutasController@ImagenGetByRestauranteId');
 Route::post('/VideoRegistro', 'RutasController@VideoRegistro');
@@ -43,4 +44,5 @@ Route::post('/VideoGetRestauranteId', 'RutasController@VideoGetRestauranteId');
 Route::post('/ComentarioRegistro', 'RutasController@ComentarioRegistro');
 Route::post('/ComentarioGetByRestauranteId', 'RutasController@ComentarioGetByRestauranteId');
 Route::post('/ComentarioGetByUsuarioId', 'RutasController@ComentarioGetByUsuarioId');
+
 //Route::post('/login', 'Usuario');

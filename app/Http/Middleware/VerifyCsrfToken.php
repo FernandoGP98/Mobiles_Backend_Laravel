@@ -24,7 +24,8 @@ class VerifyCsrfToken extends Middleware
         '/VideoGetRestauranteId',
         '/ComentarioRegistro',
         '/ComentarioGetByRestauranteId',
-        '/ComentarioGetByUsuarioId'
+        '/ComentarioGetByUsuarioId',
+        '/RestauranteRegistroPrueba'
 
     ];
 }
