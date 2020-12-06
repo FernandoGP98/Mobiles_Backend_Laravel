@@ -41,6 +41,7 @@ Route::post('/UsuarioUpdateFoto', 'RutasController@UsuarioUpdateFoto');
 Route::post('/UsuarioEliminar', 'RutasController@UsuarioEliminar');
 
 Route::post('/RestaurantesGetAllPublicados', 'RutasController@RestaurantesGetAllPublicados');
+Route::post('/RestaurantesGetAllPendientes', 'RutasController@RestaurantesGetAllPendientes');
 Route::post('/RestaurantesRegistro', 'RutasController@RestaurantesRegistro');
 Route::post('/RestauranteRegistroPrueba', 'RutasController@RestauranteRegistroPrueba');
 Route::post('/RestaurantesGetByUsuario', 'RutasController@RestaurantesGetByUsuario');

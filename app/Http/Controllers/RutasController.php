@@ -153,6 +153,20 @@ class RutasController extends Controller
         return response()->json($response);
     }
 
+    public  function RestaurantesGetAllPendientes(){
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'latitud','longitud'
+        ,'img1', 'img2', 'img3')
+            ->where('estado', 1)->get();
+        if($res->count()>0){
+            $response["restaurantes"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["restaurantes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
     public function RestaurantesGetByUsuario(Request $request){
         $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3',
         'latitud','longitud')
