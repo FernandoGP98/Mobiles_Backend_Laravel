@@ -107,21 +107,21 @@ class RutasController extends Controller
 
     public function UsuarioEliminar(Request $request){
         $usuario = Usuario::find($request->id);
-        $comm = Comentario::where('usuario_id', $usuario->id);
+        $comm = Comentario::where('usuario_id', $usuario->id)->get();
         if($comm->count()>0){
             for ($i=0; $i < $comm->count(); $i++) {
                 $comm[$i]->delete();
             }
         }
 
-        $fav = favorito::where('usuario_id', $usuario->id);
+        $fav = favorito::where('usuario_id', $usuario->id)->get();
         if(!$fav->count()>0){
             for ($i=0; $i < $fav->count(); $i++) {
                 $fav[$i]->delete();
             }
         }
 
-        $res = Restaurante::where('usuario_id', $usuario->id);
+        $res = Restaurante::where('usuario_id', $usuario->id)->get();
         if(!$res->count()>0){
             for ($i=0; $i < $res->count(); $i++) {
                 $res[$i]->delete();
