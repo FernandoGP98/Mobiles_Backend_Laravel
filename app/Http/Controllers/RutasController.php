@@ -140,8 +140,9 @@ class RutasController extends Controller
     }
 
     public  function RestaurantesGetAllPublicados(){
-        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
-        ->where('estado', 0)->get();
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'latitud','longitud'
+        ,'img1', 'img2', 'img3')
+            ->where('estado', 0)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
@@ -153,7 +154,7 @@ class RutasController extends Controller
     }
 
     public function RestaurantesGetByUsuario(Request $request){
-        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3', 'latitud','longitud')
         ->where('estado', 0)->where('usuario_id', $request->id)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
@@ -169,7 +170,9 @@ class RutasController extends Controller
         $res = Restaurante::find($request->id);
         $res->nombre = $request->nombre;
         $res->descripcion = $request->descripcion;
-        $res->locacion = $request->locacion;
+        $res->locacion = "";
+        $res->latitud=$request->latitud;
+        $res->longitud=$request->longitud;
         $res->img1 = $request->img1;
         $res->img2 = $request->img2;
         $res->img3 = $request->img3;
@@ -223,7 +226,9 @@ class RutasController extends Controller
         $restaurante->nombre = $request->nombre;
         $restaurante->descripcion = $request->descripcion;
         $restaurante->usuario_id = $request->usuario_id;
-        $restaurante->locacion = $reques->ubicacion;
+        $restaurante->locacion = "";
+        $restaurante->latitud=$request->latitud;
+        $restaurante->longitud = $request->longitud;
         $restaurante->estado = $request->estado;
         $restaurante->img1=$request->img1;
         $restaurante->img2=$request->img2;
@@ -272,7 +277,7 @@ class RutasController extends Controller
     public function FavoritoGetByUsuarioId(Request $request){
         $fav = DB::table('favoritos')
         ->select('restaurantes.id','restaurantes.nombre','restaurantes.descripcion','restaurantes.calificacion',
-        'restaurantes.img1', 'restaurantes.img2', 'restaurantes.img3')
+        'restaurantes.img1', 'restaurantes.img2', 'restaurantes.img3', 'restaurantes.latitud', 'restaurantes.longitud')
          ->join('restaurantes', 'restaurantes.id', '=', 'favoritos.restaurante_id')
          ->join('usuarios', 'usuarios.id', '=', 'favoritos.usuario_id')
          ->where('usuarios.id', $request->usuario_id)->get();
