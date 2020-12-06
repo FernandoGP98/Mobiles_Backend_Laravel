@@ -115,17 +115,19 @@ class RutasController extends Controller
         }
 
         $fav = favorito::where('usuario_id', $usuario->id)->get();
-        if(!$fav->count()>0){
+        if($fav->count()>0){
             for ($i=0; $i < $fav->count(); $i++) {
                 $fav[$i]->delete();
             }
         }
 
         $res = Restaurante::where('usuario_id', $usuario->id)->get();
-        if(!$res->count()>0){
+        if($res->count()>0){
             for ($i=0; $i < $res->count(); $i++) {
-                $res[$i]->delete();
+                Comentario::where('restaurante_id',  $res[$i]->id)->delete();
+                favorito::where('restaurante_id',  $res[$i]->id)->delete();
             }
+            Restaurante::where('usuario_id', $usuario->id)->delete();
         }
 
         if($usuario->delete()){
