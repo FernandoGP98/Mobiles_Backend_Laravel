@@ -154,7 +154,7 @@ class RutasController extends Controller
 
     public function RestaurantesGetByUsuario(Request $request){
         $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
-        ->where('estado', 0)->where('user_id', $request->id)->get();
+        ->where('estado', 0)->where('usuario_id', $request->id)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
