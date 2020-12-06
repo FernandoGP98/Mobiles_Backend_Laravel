@@ -223,7 +223,7 @@ class RutasController extends Controller
         $restaurante->nombre = $request->nombre;
         $restaurante->descripcion = $request->descripcion;
         $restaurante->usuario_id = $request->usuario_id;
-        $restaurante->locacion = "";
+        $restaurante->locacion = $reques->ubicacion;
         $restaurante->estado = $request->estado;
         $restaurante->img1=$request->img1;
         $restaurante->img2=$request->img2;
