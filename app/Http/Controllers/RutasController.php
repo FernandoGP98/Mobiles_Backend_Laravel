@@ -105,6 +105,38 @@ class RutasController extends Controller
         }
     }
 
+    public function UsuarioEliminar(Request $request){
+        $usuario = Usuario::find($request->id);
+        $comm = Comentario::where('usuario_id', $usuario->id);
+        if(!$comm->isEmpty()){
+            for ($i=0; $i < $comm->count(); $i++) {
+                $comm[$i]->delete();
+            }
+        }
+
+        $fav = favorito::where('usuario_id', $usuario->id);
+        if(!$fav->isEmpty()){
+            for ($i=0; $i < $fav->count(); $i++) {
+                $fav[$i]->delete();
+            }
+        }
+
+        $res = Restaurante::where('usuario_id', $usuario->id);
+        if(!$res->isEmpty()){
+            for ($i=0; $i < $res->count(); $i++) {
+                $res[$i]->delete();
+            }
+        }
+
+        if($usuario->delete()){
+            $response["success"]=1;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
+    }
+
     public  function RestaurantesGetAllPublicados(){
         $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
         ->where('estado', 0)->get();

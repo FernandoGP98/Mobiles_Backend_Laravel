@@ -38,6 +38,7 @@ Route::post('/UsuarioRegistrar', 'RutasController@UsuarioRegistrar');
 Route::post('/UsuarioUpdateNombre', 'RutasController@UsuarioUpdateNombre');
 Route::post('/UsuarioUpdatePass', 'RutasController@UsuarioUpdatePass');
 Route::post('/UsuarioUpdateFoto', 'RutasController@UsuarioUpdateFoto');
+Route::post('/UsuarioEliminar', 'RutasController@UsuarioEliminar');
 
 Route::post('/RestaurantesGetAllPublicados', 'RutasController@RestaurantesGetAllPublicados');
 Route::post('/RestaurantesRegistro', 'RutasController@RestaurantesRegistro');

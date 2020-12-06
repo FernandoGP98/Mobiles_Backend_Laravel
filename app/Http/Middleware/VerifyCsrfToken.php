@@ -18,6 +18,7 @@ class VerifyCsrfToken extends Middleware
         '/UsuarioRegistrar',
         '/UsuarioUpdateNombre',
         '/UsuarioUpdatePass',
+        '/UsuarioEliminar',
         '/UsuarioUpdateFoto',
         '/RestaurantesGetAllPublicados',
         '/RestaurantesRegistro',
