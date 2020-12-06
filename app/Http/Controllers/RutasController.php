@@ -202,6 +202,13 @@ class RutasController extends Controller
     }
 
     public function RestaurantesDeleteById(Request $request){
+        $res = Restaurante::where('id', $request->id)->get();
+        if($res->count()>0){
+            for ($i=0; $i < $res->count(); $i++) {
+                Comentario::where('restaurante_id',  $res[$i]->id)->delete();
+                favorito::where('restaurante_id',  $res[$i]->id)->delete();
+            }
+        }
         if(Restaurante::where('id', $request->id)->delete()){
             $response["success"]=1;
         }else{
