@@ -43,6 +43,9 @@ Route::post('/UsuarioEliminar', 'RutasController@UsuarioEliminar');
 Route::post('/RestaurantesGetAllPublicados', 'RutasController@RestaurantesGetAllPublicados');
 Route::post('/RestaurantesRegistro', 'RutasController@RestaurantesRegistro');
 Route::post('/RestauranteRegistroPrueba', 'RutasController@RestauranteRegistroPrueba');
+Route::post('/RestaurantesGetByUsuario', 'RutasController@RestaurantesGetByUsuario');
+Route::post('/RestauranteUpdateById', 'RutasController@RestauranteUpdateById');
+Route::post('/RestaurantesDeleteById', 'RutasController@RestaurantesDeleteById');
 
 Route::post('/FavoritoRegistrar', 'RutasController@FavoritoRegistrar');
 Route::post('/FavoritoGetByUsuarioId', 'RutasController@FavoritoGetByUsuarioId');

@@ -21,7 +21,7 @@ class VerifyCsrfToken extends Middleware
         '/UsuarioEliminar',
         '/UsuarioUpdateFoto',
         '/RestaurantesGetAllPublicados',
-        '/RestaurantesRegistro',
+        '/RestaurantesRegistro','/RestaurantesGetByUsuario','/RestauranteUpdateById', '/RestaurantesDeleteById',
         '/ImagenRegistro',
         '/ImagenGetByRestauranteId',
         '/VideoRegistro',
