@@ -167,6 +167,20 @@ class RutasController extends Controller
         return response()->json($response);
     }
 
+    public function RestauranteGetById(Request $request){
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3',
+        'latitud','longitud')
+        ->where('id', $request->id)->get();
+        if($res->count()>0){
+            $response["restaurantes"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["restaurantes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
     public function RestauranteUpdateById(Request $request){
         $res = Restaurante::find($request->id);
         $res->nombre = $request->nombre;

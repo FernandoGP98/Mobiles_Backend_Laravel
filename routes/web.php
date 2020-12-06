@@ -46,6 +46,7 @@ Route::post('/RestauranteRegistroPrueba', 'RutasController@RestauranteRegistroPr
 Route::post('/RestaurantesGetByUsuario', 'RutasController@RestaurantesGetByUsuario');
 Route::post('/RestauranteUpdateById', 'RutasController@RestauranteUpdateById');
 Route::post('/RestaurantesDeleteById', 'RutasController@RestaurantesDeleteById');
+Route::post('/RestauranteGetById', 'RutasController@RestauranteGetById');
 
 Route::post('/FavoritoRegistrar', 'RutasController@FavoritoRegistrar');
 Route::post('/FavoritoGetByUsuarioId', 'RutasController@FavoritoGetByUsuarioId');
