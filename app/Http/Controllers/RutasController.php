@@ -152,6 +152,46 @@ class RutasController extends Controller
         return response()->json($response);
     }
 
+    public function RestaurantesGetByUsuario(Request $request){
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3')
+        ->where('estado', 0)->where('user_id', $request->id)->get();
+        if($res->count()>0){
+            $response["restaurantes"]=$res;
+            $response["success"]=1;
+        }else{
+            $response["restaurantes"]=$res;
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
+    public function RestauranteUpdateById(Request $request){
+        $res = Restaurante::find($request->id);
+        $res->nombre = $request->nombre;
+        $res->descripcion = $request->descripcion;
+        $res->locacion = $request->locacion;
+        $res->img1 = $request->img1;
+        $res->img2 = $request->img2;
+        $res->img3 = $request->img3;
+        if($res->save()){
+            $response["usuario"]=Restaurante::find($res->id);
+            $response["success"]=1;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
+    }
+
+    public function RestaurantesDeleteById(Request $request){
+        if(Restaurante::where('id', $request->id)->delete()){
+            $response["success"]=1;
+        }else{
+            $response["success"]=0;
+        }
+        return response()->json($response);
+    }
+
     public  function RestaurantesRegistro(Request $request){
         $res = DB::insert('insert into restaurantes (nombre, descripcion, locacion,
         lunes, martes, miercoles, jueves, viernes, sabado, domingo,latitud, longitud,
