@@ -142,7 +142,7 @@ class RutasController extends Controller
     public  function RestaurantesGetAllPublicados(){
         $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'latitud','longitud'
         ,'img1', 'img2', 'img3')
-            ->where('estado', 0)->get();
+            ->where('estado', 2)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
@@ -154,8 +154,9 @@ class RutasController extends Controller
     }
 
     public function RestaurantesGetByUsuario(Request $request){
-        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3', 'latitud','longitud')
-        ->where('estado', 0)->where('usuario_id', $request->id)->get();
+        $res = Restaurante::select('id','nombre','descripcion', 'calificacion', 'img1', 'img2', 'img3',
+        'latitud','longitud')
+        ->where('usuario_id', $request->id)->get();
         if($res->count()>0){
             $response["restaurantes"]=$res;
             $response["success"]=1;
