@@ -199,6 +199,7 @@ class RutasController extends Controller
         $res = Restaurante::find($request->id);
         $res->nombre = $request->nombre;
         $res->descripcion = $request->descripcion;
+        $res->estadoo = $request->estado;
         $res->locacion = "";
         $res->latitud=$request->latitud;
         $res->longitud=$request->longitud;
