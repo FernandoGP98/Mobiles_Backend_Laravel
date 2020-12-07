@@ -318,8 +318,18 @@ class RutasController extends Controller
             $response["siHay"]=$siHay;
             return response()->json($response);
         }
+    }
 
-
+    public function RestaurantesFiltroNombre(Request $request){
+        $res = Restaurantes::where('restaurantes','like', '%'.$request->nombre.'%')->get();
+        if(!$res->isEmpty()){
+            $response["success"]=1;
+            $response["restaurantes"]=$res;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
 
 
     }
