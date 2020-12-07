@@ -215,6 +215,19 @@ class RutasController extends Controller
         }
     }
 
+    public function RestaurantePublicar(Request $request){
+        $res = Restaurante::find($request->id);
+        $res->estado = 2;
+        if($res->save()){
+            $response["usuario"]=Restaurante::find($res->id);
+            $response["success"]=1;
+            return response()->json($response);
+        }else{
+            $response["success"]=0;
+            return response()->json($response);
+        }
+    }
+
     public function RestaurantesDeleteById(Request $request){
         $res = Restaurante::where('id', $request->id)->get();
         if($res->count()>0){
