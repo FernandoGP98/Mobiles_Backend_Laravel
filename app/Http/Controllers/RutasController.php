@@ -321,7 +321,7 @@ class RutasController extends Controller
     }
 
     public function RestaurantesFiltroNombre(Request $request){
-        $res = Restaurante::where('nombre','like', '%'.$request->nombre.'%')->get();
+        $res = Restaurante::where('estado',2)->where('nombre','like', '%'.$request->nombre.'%')->get();
         if(!$res->isEmpty()){
             $response["success"]=1;
             $response["restaurantes"]=$res;
